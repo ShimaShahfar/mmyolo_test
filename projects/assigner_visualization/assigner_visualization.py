@@ -153,8 +153,10 @@ def main():
 
         img = data['inputs'].cpu().numpy().astype(np.uint8).transpose(
             (1, 2, 0))
+
         # bgr2rgb
         img = mmcv.bgr2rgb(img)
+        
 
         gt_instances = data['data_samples'].gt_instances
 

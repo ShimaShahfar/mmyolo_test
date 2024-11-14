@@ -37,7 +37,8 @@ def show_coco_json(args):
             image_path = osp.join(args.data_root, args.img_dir,
                                   image_data['file_name'])
         else:
-            image_path = osp.join(args.img_dir, image_data['file_name'])
+            image_path = osp.join(image_data['file_name'])
+            # image_path = osp.join(args.img_dir, image_data['file_name'])
 
         annotation_ids = coco.getAnnIds(
             imgIds=image_data['id'], catIds=category_ids, iscrowd=0)
@@ -100,10 +101,10 @@ def show_bbox_only(coco, anns, show_label_bbox=True, is_filling=True):
 
     if is_filling:
         p = PatchCollection(
-            polygons, facecolor=colors, linewidths=0, alpha=0.4)
+            polygons, facecolor=colors, linewidths=2, alpha=0.4)
         ax.add_collection(p)
     p = PatchCollection(
-        polygons, facecolor='none', edgecolors=colors, linewidths=2)
+        polygons, facecolor='white', edgecolors=colors, linewidths=2)
     ax.add_collection(p)
 
 
@@ -114,7 +115,8 @@ def parse_args():
         '--img-dir', default='data/coco/train2017', help='image folder path')
     parser.add_argument(
         '--ann-file',
-        default='data/coco/annotations/instances_train2017.json',
+        default = '/home/bizon/data/YOLOv7_exp/opening_1/data/val.json',
+        # default='data/coco/annotations/instances_train2017.json',
         help='ann file path')
     parser.add_argument(
         '--wait-time', type=float, default=2, help='the interval of show (s)')

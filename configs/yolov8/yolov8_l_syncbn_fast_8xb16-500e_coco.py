@@ -1,4 +1,4 @@
-_base_ = './yolov8_m_syncbn_fast_8xb16-500e_coco.py'
+_base_ = './yolov8_m_syncbn_fast_8xb16-500e_planitar.py'
 
 # ========================modified parameters======================
 deepen_factor = 1.00
@@ -37,3 +37,4 @@ train_pipeline = [
 ]
 
 train_dataloader = dict(dataset=dict(pipeline=train_pipeline))
+visualizer = dict(vis_backends = [dict(type='LocalVisBackend'), dict(type='WandbVisBackend')]) # noqa

@@ -26,6 +26,7 @@ def yolov5_collate(data_batch: Sequence,
     for i in range(len(data_batch)):
         datasamples = data_batch[i]['data_samples']
         inputs = data_batch[i]['inputs']
+        # print(f"inputs in collate_yolov5: {inputs}")
         batch_imgs.append(inputs)
 
         gt_bboxes = datasamples.gt_instances.bboxes.tensor
@@ -82,7 +83,7 @@ class BatchShapePolicy:
 
     def __init__(self,
                  batch_size: int = 32,
-                 img_size: int = 640,
+                 img_size: int = 1024,
                  size_divisor: int = 32,
                  extra_pad_ratio: float = 0.5):
         self.img_size = img_size
@@ -98,7 +99,7 @@ class BatchShapePolicy:
         image_shapes = []
         for data_info in data_list:
             image_shapes.append((data_info['width'], data_info['height']))
-
+            # print(f"data_info: {data_info}")
         image_shapes = np.array(image_shapes, dtype=np.float64)
 
         n = len(image_shapes)  # number of images

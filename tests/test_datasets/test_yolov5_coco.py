@@ -10,14 +10,14 @@ class TestYOLOv5CocoDataset(unittest.TestCase):
         batch_shapes_cfg = dict(
             type='BatchShapePolicy',
             batch_size=2,
-            img_size=640,
+            img_size=1024,
             size_divisor=32,
             extra_pad_ratio=0.5)
 
         # test serialize_data=True
         dataset = YOLOv5CocoDataset(
             data_prefix=dict(img='imgs'),
-            ann_file='tests/data/coco_sample.json',
+            ann_file='/home/bizon/data/YOLOv7_exp/opening_5/data/val.json',
             filter_cfg=dict(filter_empty_gt=False, min_size=0),
             pipeline=[],
             serialize_data=True,
@@ -25,7 +25,7 @@ class TestYOLOv5CocoDataset(unittest.TestCase):
         )
 
         expected_img_ids = [3, 0, 2, 1]
-        expected_batch_shapes = [[512, 672], [512, 672], [672, 672],
+        expected_batch_shapes = [[512, 1024], [512, 1024], [672, 672],
                                  [672, 672]]
         for i, data in enumerate(dataset):
             assert data['img_id'] == expected_img_ids[i]
@@ -34,7 +34,7 @@ class TestYOLOv5CocoDataset(unittest.TestCase):
         # test serialize_data=True
         dataset = YOLOv5CocoDataset(
             data_prefix=dict(img='imgs'),
-            ann_file='tests/data/coco_sample.json',
+            ann_file='/home/bizon/data/YOLOv7_exp/opening_5/data/val.json',
             filter_cfg=dict(filter_empty_gt=False, min_size=0),
             pipeline=[],
             serialize_data=False,
@@ -42,7 +42,7 @@ class TestYOLOv5CocoDataset(unittest.TestCase):
         )
 
         expected_img_ids = [3, 0, 2, 1]
-        expected_batch_shapes = [[512, 672], [512, 672], [672, 672],
+        expected_batch_shapes = [[512, 1024], [512, 672], [672, 672],
                                  [672, 672]]
         for i, data in enumerate(dataset):
             assert data['img_id'] == expected_img_ids[i]
@@ -51,7 +51,7 @@ class TestYOLOv5CocoDataset(unittest.TestCase):
     def test_prepare_data(self):
         dataset = YOLOv5CocoDataset(
             data_prefix=dict(img='imgs'),
-            ann_file='tests/data/coco_sample.json',
+            ann_file='/home/bizon/data/YOLOv7_exp/opening_5/data/val.json',
             filter_cfg=dict(filter_empty_gt=False, min_size=0),
             pipeline=[],
             serialize_data=True,
@@ -63,7 +63,7 @@ class TestYOLOv5CocoDataset(unittest.TestCase):
         # test with test_mode = True
         dataset = YOLOv5CocoDataset(
             data_prefix=dict(img='imgs'),
-            ann_file='tests/data/coco_sample.json',
+            ann_file='/home/bizon/data/YOLOv7_exp/opening_5/data/val.json',
             test_mode=True,
             pipeline=[])
 
